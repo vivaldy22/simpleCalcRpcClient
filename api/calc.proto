@@ -1,0 +1,17 @@
+syntax = "proto3";
+package api;
+
+option go_package="../api";
+
+message AdditionMessage {
+    int32 num1 = 1;
+    int32 num2 = 2;
+}
+
+message AdditionResultMessage {
+    int32 resNum = 1;
+}
+
+service Addition {
+    rpc AddNumber(AdditionMessage) returns (AdditionResultMessage){}
+}
