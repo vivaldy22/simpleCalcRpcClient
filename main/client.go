@@ -15,14 +15,50 @@ func main() {
 	}
 	defer conn.Close()
 
-	c := api.NewAdditionClient(conn)
+	c := api.NewCalcClient(conn)
 
-	response, err := c.AddNumber(context.Background(), &api.AdditionMessage{
+	response, err := c.AddNumber(context.Background(), &api.ParameterMessage{
 		Num1: 2,
 		Num2: 3,
 	})
 	if err != nil {
-		log.Fatalf("Error when calling SayHello: %s", err)
+		log.Fatalf("Error when calling AddNumber: %s", err)
+	}
+	log.Printf("%v", response.ResNum)
+
+	response, err = c.SubNumber(context.Background(), &api.ParameterMessage{
+		Num1: 2,
+		Num2: 3,
+	})
+	if err != nil {
+		log.Fatalf("Error when calling SubNumber: %s", err)
+	}
+	log.Printf("%v", response.ResNum)
+
+	response, err = c.MulNumber(context.Background(), &api.ParameterMessage{
+		Num1: 2,
+		Num2: 3,
+	})
+	if err != nil {
+		log.Fatalf("Error when calling MulNumber: %s", err)
+	}
+	log.Printf("%v", response.ResNum)
+
+	response, err = c.DivNumber(context.Background(), &api.ParameterMessage{
+		Num1: 10,
+		Num2: 5,
+	})
+	if err != nil {
+		log.Fatalf("Error when calling DivNumber: %s", err)
+	}
+	log.Printf("%v", response.ResNum)
+
+	response, err = c.DivNumber(context.Background(), &api.ParameterMessage{
+		Num1: 2,
+		Num2: 0,
+	})
+	if err != nil {
+		log.Fatalf("Error when calling DivNumber: %s", err)
 	}
 	log.Printf("%v", response.ResNum)
 }
